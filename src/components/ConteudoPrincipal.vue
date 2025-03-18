@@ -5,7 +5,7 @@ import SuaLista from "./SuaLista.vue";
 export default {
   data() {
     return {
-      ingredientes: [] as String[],
+      ingredientes: [] as string[],
     };
   },
   components: { SelecionarIngredientes, SuaLista },

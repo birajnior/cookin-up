@@ -1,7 +1,9 @@
 <script lang="ts">
+import type { PropType } from 'vue';
+
 export default {
   props: {
-    texto: { type: String, requerid: true },
+    texto: { type: String as PropType<string>, requerid: true },
     ativa: Boolean,
   },
 };

@@ -5,7 +5,11 @@ import Tag from "./Tag.vue";
 export default {
   components: { Tag },
   props: {
-    ingredientes: { type: Array as PropType<String[]>, requerid: true },
+    ingredientes: {
+      type: Array as PropType<string[]>,
+      requerid: true,
+      default: () => [],
+    },
   },
 };
 </script>
