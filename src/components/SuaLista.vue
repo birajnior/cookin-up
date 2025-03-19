@@ -7,7 +7,7 @@ export default {
   props: {
     ingredientes: {
       type: Array as PropType<string[]>,
-      requerid: true,
+      required: true,
       default: () => [],
     },
   },

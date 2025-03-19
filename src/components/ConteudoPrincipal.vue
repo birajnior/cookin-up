@@ -1,4 +1,5 @@
 <script lang="ts">
+import Botao from "./Botao.vue";
 import SelecionarIngredientes from "./SelecionarIngredientes.vue";
 import SuaLista from "./SuaLista.vue";
 
@@ -8,10 +9,15 @@ export default {
       ingredientes: [] as string[],
     };
   },
-  components: { SelecionarIngredientes, SuaLista },
+  components: { SelecionarIngredientes, SuaLista, Botao },
   methods: {
     adicionarIngrediente(event: string) {
       this.ingredientes.push(event);
+    },
+    removerIngrediente(ingrediente: string) {
+      this.ingredientes = this.ingredientes.filter(
+        (iLista) => iLista !== ingrediente // ✅ Agora está correto!
+      );
     },
   },
 };
@@ -21,7 +27,11 @@ export default {
   <main class="conteudo-principal">
     <SuaLista :ingredientes="ingredientes" />
 
-    <SelecionarIngredientes @adicionar-ingrediente="adicionarIngrediente" />
+    <SelecionarIngredientes
+      @adicionar-ingrediente="adicionarIngrediente"
+      @remover-ingrediente="removerIngrediente"
+    />
+    <Botao />
   </main>
 </template>
 
