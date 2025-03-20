@@ -14,7 +14,7 @@ export default {
     this.categorias = await obterCategorias();
   },
   components: { CardCategoria, Botao },
-  emits: ["adicionarIngrediente", "removerIngrediente"],
+  emits: ["adicionarIngrediente", "removerIngrediente", "buscarReceitas"],
 };
 </script>
 
@@ -39,7 +39,7 @@ export default {
     <p class="paragrafo dica">
       *Atenção: consideramos que você tem em casa sal, pimenta e água.
     </p>
-    <Botao texto="Buscar receitas!" />
+    <Botao texto="Buscar receitas!" @click="$emit('buscarReceitas')" />
   </section>
 </template>
 

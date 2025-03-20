@@ -1,14 +1,17 @@
 <script lang="ts">
+import MostrarReceitas from "./MostrarReceitas.vue";
 import SelecionarIngredientes from "./SelecionarIngredientes.vue";
 import SuaLista from "./SuaLista.vue";
 
+type Pagina = "SelecionarIngredientesComBotao" | "MostrarReceitas";
 export default {
   data() {
     return {
       ingredientes: [] as string[],
+      conteudo: "SelecionarIngredientesComBotao" as Pagina,
     };
   },
-  components: { SelecionarIngredientes, SuaLista },
+  components: { SelecionarIngredientes, SuaLista, MostrarReceitas },
   methods: {
     adicionarIngrediente(event: string) {
       this.ingredientes.push(event);
@@ -17,6 +20,9 @@ export default {
       this.ingredientes = this.ingredientes.filter(
         (iLista) => iLista !== ingrediente // ✅ Agora está correto!
       );
+    },
+    navegar(pagina: Pagina) {
+      this.conteudo = pagina;
     },
   },
 };
@@ -27,8 +33,14 @@ export default {
     <SuaLista :ingredientes="ingredientes" />
 
     <SelecionarIngredientes
+      v-if="conteudo === 'SelecionarIngredientesComBotao'"
       @adicionar-ingrediente="adicionarIngrediente"
       @remover-ingrediente="removerIngrediente"
+      @buscar-receitas="navegar('MostrarReceitas')"
+    />
+    <MostrarReceitas
+      v-else-if="conteudo === 'MostrarReceitas'"
+      @editar-receitas="navegar('SelecionarIngredientesComBotao')"
     />
   </main>
 </template>
