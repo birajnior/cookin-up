@@ -3,8 +3,13 @@ import { obterReceitas } from "@/http";
 import type IReceitas from "@/interfaces/IReceitas";
 import Botao from "./Botao.vue";
 import CardReceita from "./CardReceita.vue";
+import type { PropType } from "vue";
+import { itensDeLista1EstaoEmLista2 } from "@/operacoes/listas";
 
 export default {
+  props: {
+    ingredientes: { type: Array as PropType<string[]>, required: true },
+  },
   data() {
     return {
       receitasEncontradas: [] as IReceitas[],
@@ -13,7 +18,14 @@ export default {
   async created() {
     const receitas = await obterReceitas();
 
-    this.receitasEncontradas = receitas.slice(0, 8);
+    this.receitasEncontradas = receitas.filter((receita) => {
+      const possoFrazerReceita = itensDeLista1EstaoEmLista2(
+        receita.ingredientes,
+        this.ingredientes
+      );
+      // queremos verificar se os ingredientes de uma receita estão inclusos na lista de ingredientes.
+      return possoFrazerReceita;
+    });
   },
   components: { Botao, CardReceita },
   emits: ["editarReceitas"],
