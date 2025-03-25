@@ -7,7 +7,7 @@ export default {
 </script>
 
 <template>
-  <button class="btn">{{ texto }}</button>
+  <button class="btn paragrafo-lg">{{ texto }}</button>
 </template>
 
 <style scoped>
